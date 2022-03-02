@@ -30,5 +30,48 @@ Illustrates how to design the random quantum circuit for the different families 
 ### [quantumRC-Ising.ipynb](https://github.com/laiadc/Optimal_QRC/blob/main/notebooks/quantumRC-Ising.ipynb) 
 The performance of the Ising model is assesed. Also, the Ising model is transpiled to a quantum circuit which uses only T, H and CNOT gates. The size of such circuit is studied.
 
+### [Figures.ipynb](https://github.com/laiadc/Optimal_QRC/blob/main/notebooks/Figures.ipynb) 
+This notebook analyses the results of the work. 
 
+## Scripts
+
+Additionally, we provide three scripts that can be used to simulate the random quantum circuits used as reservoirs. The scripts `runQC`and `runQC_H2O` can be used to run the simulations for the LiH and H2O molecules respectively. To run them, just type:
+
+`python runQC.py num_gates gates_set observable_type `
+
+where 
+
++ num_gates is the number of gates (in this work we have used 20, 50, 100, 150, 200)
++ gates_set is the name of the gate set, from the list [G1, G2, G3, MG, D2, D3, Dn]
++ and observable_type must be single
+
+he script `runQC_Ising`and  can be used to run the simulations of the Ising model. To run them, just type:
+
+`python runQC_Ising.py name_molecule `
+
+where 
+
++ name_molecule is either "LiH" or "H2O"
+
+## Contributions
+
+Contributions are welcome!  For bug reports or requests please [submit an issue](https://github.com/laiadc/PFM_Bearing_Fault_Detection/issues).
+
+## Contact  
+
+Feel free to contact me to discuss any issues, questions or comments.
+
+* GitHub: [laiadc](https://github.com/laiadc)
+* Email: [laia.domingo@icmat.es](laia.domingo@icmat.es)
+
+### BibTex reference format for citation for the Code
+```
+@misc{QRCDomingo,
+title={Optimal quantum reservoir computing for the NISQ era},
+url={https://github.com/laiadc/Optimal_QRC},
+note={GitHub repository containing a criterion of optimality form quantum reservoir computing.},
+author={Laia Domingo Colomer},
+  year={2022}
+}
+```
 
