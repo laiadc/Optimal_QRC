@@ -9,7 +9,7 @@ The results are illustrated in a set of [Jupyter](https://jupyter.org/) notebook
 The pipeline used to train the quantum reservoir computing model is the following.  First, the electronic Hamiltonian of the moleculeis mapped to the qubit space,  and its ground state is calculated by direct diagonalization.  Such ground state is fed to the quantum reservoir,  which is a random quantum system sampled from one of the seven families studied in this work.  Local Pauli operators are then measured and fed to the classical machine learning algorithm, which predicts the excited energy of the molecule.  The choice of the quantum reservoir is optimised according to the majorization principle.
 
 
-<p align="center"><img src="https://github.com/laiadc/Optimal_QRC/blob/main/figures/setting.png"  align=middle width=600pt />
+<p align="center"><img src="https://github.com/laiadc/Optimal_QRC/blob/main/figures/setting.png"  align=middle />
 </p>
 <p align="center">
 <em> Pipeline used to train the quantum reservoir computing model. </em>
