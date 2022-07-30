@@ -21,10 +21,14 @@ from qiskit.extensions import  UnitaryGate
 from qiskit.opflow import I, X, Y, Z
 from qiskit.circuit import Parameter
 from qiskit.opflow.evolutions import PauliTrotterEvolution,Suzuki
+from tqdm import tqdm
 
 def Ising(ground_states, nqbits=8, t=10):
     qubit_idx = list(range(nqbits))
     qubit_pairs = list(itertools.combinations(qubit_idx, 2))
+    Js = np.random.normal(0.75, 0.1)
+    h_over_Js = 0.1
+    h = Js*h_over_Js
 
     pauli_op = 0
     name_gate=''
@@ -32,14 +36,20 @@ def Ising(ground_states, nqbits=8, t=10):
         name_gate+= 'I' 
     for pair in qubit_pairs:
         name = name_gate[:pair[0]] + 'Z' + name_gate[(pair[0]+1):pair[1]] + 'Z' + name_gate[(pair[1]+1):]
-        coef = np.random.normal(0.75, 0.1)
+        if param_choice=='optimal':
+            coef = np.random.uniform(-Js/2,Js/2)
+        else:
+            coef = np.random.normal(0.75, 0.1)
         pauli_op += coef*PauliOp(Pauli(name))
 
     for qubit in qubit_idx:
         name = name_gate[:qubit] + 'X' + name_gate[(qubit+1):]
-        coef = np.random.normal(1, 0.1)
-        pauli_op += coef*PauliOp(Pauli(name))
-        
+        if param_choice=='optimal':
+            coef = h
+        else:
+            coef = np.random.normal(1, 0.1)
+        pauli_op += coef*PauliOp(Pauli(name))    
+
     evo_time = Parameter('θ')
     evolution_op = (evo_time*pauli_op).exp_i()
     trotterized_op = PauliTrotterEvolution(trotter_mode=Suzuki(order=2, reps=1)).convert(evolution_op)
@@ -109,7 +119,9 @@ elif name_molecule=='H2O':
             ground_states = np.load(f)
     nqbits=10
 
-for j in range(40):
+param_choice='normal'
+
+for j in tqdm(range(100)):
     # Run circuit for all values of ground states:
     obs_res = Ising(ground_states, nqbits)  
 
